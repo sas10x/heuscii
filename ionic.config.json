@@ -1,0 +1,7 @@
+{
+  "name": "heusc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
