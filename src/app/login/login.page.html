@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end" *ngIf="!message">
+      <ion-button routerLink="/signup">Register</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="header">
+    <h1>CHBC</h1>
+    <img src="assets/cebu-home-builders.jpg" />
+  </div>
+
+  <div id="container" *ngIf="message">
+    <strong>Your QR Code</strong>
+    <p>Show this on entering <strong class="krristann">CHBC</strong> Stores</p>
+    <ngx-qrcode 
+      [elementType]="elementType" 
+      [value]="message"
+      cssClass="aclass"
+      errorCorrectionLevel="L">
+    </ngx-qrcode>
+  </div>
+</ion-content>

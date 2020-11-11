@@ -1,0 +1,31 @@
+.kristan {
+    padding:0 5% 0 5%;
+}
+.kristan-indent{
+    text-indent: 50px;
+    text-align: justify;
+}
+
+#header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-weight: 700;
+      font-size: 26px;
+      color: #010100;
+      margin-bottom: 15%;
+    }
+
+    img {
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      border: 8px solid #ffffff;
+    }
+  }
+.kristan-btn {
+    float: right;
+    // margin: 0 auto;
+}
