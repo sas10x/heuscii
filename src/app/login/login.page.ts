@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { from, Observable} from 'rxjs';
-import { map, filter, scan } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { QrcodeService } from '../services/qrcode.service';
 
 @Component({
@@ -13,7 +14,19 @@ import { QrcodeService } from '../services/qrcode.service';
 export class LoginPage implements OnInit {
   elementType = 'url';
   message:string;
-  constructor(private storage: Storage, private router: Router, private qrcodeService: QrcodeService) { }
+  subscribe:any;
+  constructor(private platform: Platform, private storage: Storage, private router: Router, private qrcodeService: QrcodeService) { 
+
+    this.subscribe = this.platform.backButton.subscribeWithPriority(77777, () =>{
+      if (this.constructor.name == "LoginPage")
+      {
+        if (window.confirm("do you want to exit app"))
+        {
+          navigator["app"].exitApp();
+        }
+      }
+    })
+  }
 
   ngOnInit() {
     this.qrcodeService.currentMessage.subscribe(message => {this.message = message});

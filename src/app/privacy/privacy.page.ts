@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { from } from 'rxjs';
 import { map, filter, scan } from 'rxjs/operators';
@@ -12,8 +13,18 @@ import { QrcodeService } from '../services/qrcode.service';
 })
 export class PrivacyPage implements OnInit {
   message:string;
-
-  constructor(private router: Router, private storage: Storage, private qrcodeService: QrcodeService) { }
+  subscribe:any;
+  constructor(private platform: Platform, private router: Router, private storage: Storage, private qrcodeService: QrcodeService) {
+    this.subscribe = this.platform.backButton.subscribeWithPriority(77777, () =>{
+      if (this.constructor.name == "LoginPage")
+      {
+        if (window.confirm("do you want to exit app"))
+        {
+          navigator["app"].exitApp();
+        }
+      }
+    })
+   }
 
   ngOnInit() {
     this.qrcodeService.currentMessage.subscribe(message => {this.message = message});

@@ -5,6 +5,7 @@ import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { QrcodeService } from '../services/qrcode.service';
 import { Storage } from '@ionic/storage';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -26,8 +27,19 @@ export class SignupPage implements OnInit {
   value:string;
   message:string;
   error:any;
-  constructor(private qrcodeService: QrcodeService, private fb: FormBuilder, private storage: Storage, private router: Router) { }
 
+  subscribe:any;
+  constructor(private platform: Platform, private qrcodeService: QrcodeService, private fb: FormBuilder, private storage: Storage, private router: Router) {
+    this.subscribe = this.platform.backButton.subscribeWithPriority(77777, () =>{
+      if (this.constructor.name == "LoginPage")
+      {
+        if (window.confirm("do you want to exit app"))
+        {
+          navigator["app"].exitApp();
+        }
+      }
+    })
+   }
   ngOnInit() {
     this.qrcodeService.currentMessage.subscribe(message => 
       {
