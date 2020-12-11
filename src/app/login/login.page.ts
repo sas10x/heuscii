@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { QrcodeService } from '../services/qrcode.service';
+
+import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
 
 @Component({
   selector: 'app-login',
@@ -15,17 +18,15 @@ export class LoginPage implements OnInit {
   elementType = 'url';
   message:string;
   subscribe:any;
-  constructor(private platform: Platform, private storage: Storage, private router: Router, private qrcodeService: QrcodeService) { 
-
-    this.subscribe = this.platform.backButton.subscribeWithPriority(77777, () =>{
-      if (this.constructor.name == "LoginPage")
-      {
+  constructor(private platform: Platform, private storage: Storage, private router: Router, private qrcodeService: QrcodeService, private routerOutlet: IonRouterOutlet) { 
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
         if (window.confirm("do you want to exit app"))
         {
-          navigator["app"].exitApp();
+          App.exitApp();
         }
       }
-    })
+    });
   }
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class LoginPage implements OnInit {
   }
 
   getTodo() {
-    return from(this.storage.get('codea744ea510e34'))
+    return from(this.storage.get('codea744ea510e34v101'))
       .pipe(map(response => response));
   }
 }

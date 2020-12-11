@@ -21,7 +21,4 @@ export class QrcodeService {
   register(body) {
     return this.http.post(this.customerUrl+'signup', body)
   }
-  chbcSession(body) {
-    return this.http.post(this.customerUrl+'session', body)
-  }
 }

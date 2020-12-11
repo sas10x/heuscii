@@ -5,7 +5,10 @@ import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { QrcodeService } from '../services/qrcode.service';
 import { Storage } from '@ionic/storage';
-import { Platform } from '@ionic/angular';
+
+import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
 
 @Component({
   selector: 'app-signup',
@@ -29,16 +32,15 @@ export class SignupPage implements OnInit {
   error:any;
 
   subscribe:any;
-  constructor(private platform: Platform, private qrcodeService: QrcodeService, private fb: FormBuilder, private storage: Storage, private router: Router) {
-    this.subscribe = this.platform.backButton.subscribeWithPriority(77777, () =>{
-      if (this.constructor.name == "LoginPage")
-      {
+  constructor(private platform: Platform, private qrcodeService: QrcodeService, private fb: FormBuilder, private storage: Storage, private router: Router, private routerOutlet: IonRouterOutlet) {
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
         if (window.confirm("do you want to exit app"))
         {
-          navigator["app"].exitApp();
+          App.exitApp();
         }
       }
-    })
+    });
    }
   ngOnInit() {
     this.qrcodeService.currentMessage.subscribe(message => 
@@ -64,7 +66,7 @@ export class SignupPage implements OnInit {
     this.qrcodeService.register(this.profileForm.value).subscribe(
       res => 
       {
-        this.storage.set('codea744ea510e34', res.toString());
+        this.storage.set('codea744ea510e34v101', res.toString());
         this.qrcodeService.changeMessage(res.toString())
       },
       err => {

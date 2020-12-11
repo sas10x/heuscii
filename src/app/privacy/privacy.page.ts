@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { from } from 'rxjs';
 import { map, filter, scan } from 'rxjs/operators';
 import { QrcodeService } from '../services/qrcode.service';
+
+import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
+
 
 @Component({
   selector: 'app-privacy',
@@ -13,17 +17,16 @@ import { QrcodeService } from '../services/qrcode.service';
 })
 export class PrivacyPage implements OnInit {
   message:string;
-  subscribe:any;
-  constructor(private platform: Platform, private router: Router, private storage: Storage, private qrcodeService: QrcodeService) {
-    this.subscribe = this.platform.backButton.subscribeWithPriority(77777, () =>{
-      if (this.constructor.name == "LoginPage")
-      {
+  public subscription: any;
+  constructor(private platform: Platform, private router: Router, private storage: Storage, private qrcodeService: QrcodeService, private routerOutlet: IonRouterOutlet) {
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
         if (window.confirm("do you want to exit app"))
         {
-          navigator["app"].exitApp();
+          App.exitApp();
         }
       }
-    })
+    });
    }
 
   ngOnInit() {
@@ -48,7 +51,10 @@ export class PrivacyPage implements OnInit {
     this.router.navigate(['/login']);
   }
   getTodo() {
-    return from(this.storage.get('codea744ea510e34'))
+    return from(this.storage.get('codea744ea510e34v101'))
       .pipe(map(response => response));
+  }
+  exit() {
+    this.router.navigate(['/manual'])
   }
 }

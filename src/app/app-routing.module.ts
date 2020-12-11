@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'privacy',
     loadChildren: () => import('./privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
+  {
+    path: 'manual',
+    loadChildren: () => import('./manual/manual.module').then( m => m.ManualPageModule)
+  },
 ];
 
 @NgModule({
