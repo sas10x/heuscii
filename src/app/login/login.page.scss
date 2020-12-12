@@ -29,7 +29,25 @@ ion-toolbar {
         border: 8px solid #ffffff;
       }
     }
+    .lns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
   
+      h1 {
+        font-weight: 700;
+        font-size: 26px;
+        color: #010100;
+        margin-bottom: 15%;
+      }
+  
+      img {
+        width: 125px;
+        height: 125px;
+        border-radius: 50%;
+        border: 8px solid #ffffff;
+      }
+    }
     #form {
       margin-top: 15%;
       padding-left: 30px;
@@ -75,8 +93,8 @@ ion-toolbar {
     text-decoration: none;
   }
   .krristann {
-    // --background: var(--charcoal, #36454f);
-    // --ion-color-warning-tint
-    // --color: var(--ion-color-primary-shade);
     color:  var(--ion-color-warning-tint);
+  }
+  .krristann-lns {
+    color:  var(--ion-color-primary-lns);
   }
