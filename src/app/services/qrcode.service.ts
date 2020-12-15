@@ -11,7 +11,7 @@ export class QrcodeService {
   currentMessage = this.messageSource.asObservable();
 
   constructor(private http: HttpClient) { }
-  // customerUrl: string = "http://localhost:8888/api/customer/";
+  
   customerUrl: string = "https://heusc.com/api/customer/";
 
   
