@@ -20,13 +20,11 @@ export class PrivacyPage implements OnInit {
   public subscription: any;
   constructor(private platform: Platform, private router: Router, private storage: Storage, private qrcodeService: QrcodeService, private routerOutlet: IonRouterOutlet) {
     this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet.canGoBack()) {
-        if (window.confirm("do you want to exit app"))
-        {
-          App.exitApp();
-        }
+      if (window.confirm("do you want to exit app"))
+      {
+        App.exitApp();
       }
-    });
+  });
    }
 
   ngOnInit() {

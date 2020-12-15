@@ -20,12 +20,10 @@ export class LoginPage implements OnInit {
   subscribe:any;
   constructor(private platform: Platform, private storage: Storage, private router: Router, private qrcodeService: QrcodeService, private routerOutlet: IonRouterOutlet) { 
     this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet.canGoBack()) {
         if (window.confirm("do you want to exit app"))
         {
           App.exitApp();
         }
-      }
     });
   }
 

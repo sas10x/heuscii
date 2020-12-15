@@ -12,7 +12,7 @@ export class QrcodeService {
 
   constructor(private http: HttpClient) { }
   // customerUrl: string = "http://localhost:8888/api/customer/";
-  customerUrl: string = "http://api.cebusteel.ph/api/customer/";
+  customerUrl: string = "https://heusc.com/api/customer/";
 
   
   changeMessage(message: string) {

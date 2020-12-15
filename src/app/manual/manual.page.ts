@@ -13,13 +13,11 @@ export class ManualPage implements OnInit {
 
   constructor(private platform: Platform, private routerOutlet: IonRouterOutlet, private router: Router) { 
     this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet.canGoBack()) {
-        if (window.confirm("do you want to exit app"))
-        {
-          App.exitApp();
-        }
+      if (window.confirm("do you want to exit app"))
+      {
+        App.exitApp();
       }
-    });
+  });
   }
 
   ngOnInit() {
