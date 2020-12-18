@@ -23,8 +23,11 @@ ion-toolbar {
       }
   
       img {
-        width: 125px;
-        height: 125px;
+        // width: 125px;
+        // height: 125px;
+        max-height: 100%;
+        // height: 14%;
+        width: auto;
         border-radius: 50%;
         border: 8px solid #ffffff;
       }
@@ -67,12 +70,11 @@ ion-toolbar {
 
   #container {
     text-align: center;
-  
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 10%;
+    // transform: translateY(-40%);
   }
   
   #container strong {
@@ -97,4 +99,7 @@ ion-toolbar {
   }
   .krristann-lns {
     color:  var(--ion-color-primary-lns);
+  }
+  .imahe {
+    height: 20vh;
   }
